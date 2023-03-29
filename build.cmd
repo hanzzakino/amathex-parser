@@ -1,1 +1,1 @@
-pyinstaller -i resources/favicon.ico -F --noconsole src/app.py
+pyinstaller -F --noconsole src/app.py
