@@ -19,7 +19,6 @@ import os
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
-    # [...]
     scriptDir = os.path.dirname(os.path.realpath(__file__))
 
     window = QMainWindow()
