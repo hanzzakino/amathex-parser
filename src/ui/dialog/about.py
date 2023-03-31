@@ -13,7 +13,7 @@ class AboutDialog(object):
         dialog.resize(280, 140)
         dialog.setFixedSize(280, 140)
         self.btn_aboutOK = QPushButton(dialog)
-        self.btn_aboutOK.setObjectName(u'btn_aboutOK')
+        self.btn_aboutOK.setFont(self.style.fnt_roboto_bold(10))
         self.btn_aboutOK.setGeometry(QRect(110, 90, 75, 31))
         self.label = QLabel(dialog)
         self.label.setObjectName(u'label')
@@ -39,7 +39,7 @@ class AboutDialog(object):
             QCoreApplication.translate('dialog', u'About', None))
         self.btn_aboutOK.setText(QCoreApplication.translate(
             'dialog', u'OK', None))
-        self.label.setText(QCoreApplication.translate('dialog', u'## MathEx\n'
+        self.label.setText(QCoreApplication.translate('dialog', u'## AmthEx\n'
                                                       '#### Math Expression Parser\n'
                                                       '##### By: Hanz Aquino', None))
     # retranslateUi

@@ -1,6 +1,6 @@
 '''
 @author: Hanz Aquino
-A UI for my Math expression solver algorithm called MathExParser
+A UI for my Math expression solver algorithm called AmthEx (originally MathExParser)
 '''
 
 __author__ = 'Hanz Aquino'

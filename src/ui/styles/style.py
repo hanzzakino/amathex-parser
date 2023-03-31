@@ -22,41 +22,87 @@ class Style():
     def current_theme(self):
         if self.theme == 'dark':
             colr_bg = '#212121'
-            colr_bg2 = '#303030'
+            colr_fg = 'rgb(235,235,235)'
             colr_txtDim = 'rgb(160,160,160)'
-            colr_accent = '#77bdfb'
-            colr_txtfield = 'rgb(230,230,230)'
-            return (
-                f'''
-
-                QWindow#Mathex {{   }}
-                QWidget#widget_main {{ background-color: {colr_bg}; }}
-                QLineEdit#txt_input {{ border-style: none; padding: 0px 10px 0px 10px; background-color: {colr_txtfield}; }}
-                QLabel#lbl_input {{ color: {colr_txtDim}; }}
-                QLineEdit#txt_output {{ border-style: none; padding: 0px 10px 0px 10px; background-color: {colr_txtfield}; }}
-                QLabel#lbl_output {{ color: {colr_txtDim}; }}
-                QLabel#lbl_maintitle {{ color: {colr_accent}; }}
-                QMenuBar#menuBar {{ color: {colr_txtDim}; background-color: {colr_bg2}; }}
-                QMenu#menu_help {{ color: {colr_txtDim}; background-color: {colr_bg2}; }}
-                
-                ''')
+            colr_accent = '#2678db'
+            colr_txtfield = '#303030'
         else:
             colr_bg = '#ffffff'
-            colr_bg2 = '#ffffff'
+            colr_fg = 'black'
             colr_txtDim = 'rgb(50,50,50)'
-            colr_accent = '#77bdfb'
+            colr_accent = '#2678db'
             colr_txtfield = 'rgb(235,235,235)'
-            return (
-                f'''
 
-                QWindow#Mathex {{   }}
-                QWidget#widget_main {{ background-color: {colr_bg}; }}
-                QLineEdit#txt_input {{ border-style: none; padding: 0px 10px 0px 10px; background-color: {colr_txtfield}; }}
-                QLabel#lbl_input {{ color: {colr_txtDim}; }}
-                QLineEdit#txt_output {{ border-style: none; padding: 0px 10px 0px 10px; background-color: {colr_txtfield}; }}
-                QLabel#lbl_output {{ color: {colr_txtDim}; }}
-                QLabel#lbl_maintitle {{ color: {colr_accent}; }}
-                QMenuBar#menuBar {{ color: {colr_txtDim}; background-color: {colr_bg2}; }}
-                QMenu#menu_help {{ color: {colr_txtDim}; background-color: {colr_bg2}; }}
-                
-                ''')
+        return (
+            f'''
+            QWindow#Amthex {{ 
+            }}
+            QWidget {{ 
+                background-color: {colr_bg};
+            }}
+            QPushButton {{
+                outline: none;
+                border-radius: 4px;
+                background-color: {colr_accent};
+                color: white;
+            }}
+            QLineEdit {{
+                border-style: none;
+                padding: 0px 10px 0px 10px;
+                background-color: {colr_txtfield};
+                color: {colr_fg};
+                border-radius: 4px;
+                letter-spacing: 0.5px;
+            }}
+            QLabel {{ 
+                color: {colr_txtDim};
+                letter-spacing: 1px;
+            }}
+            QLabel#lbl_maintitle {{ 
+                color: {colr_accent};
+            }}
+
+            QMenuBar::item {{
+                background-color: {colr_bg};
+                color: {colr_txtDim};
+            }}
+
+            QMenuBar::item:selected {{
+                background-color: {colr_accent};
+                color: #FFFFFF;
+            }}
+
+            QMenuBar::item:pressed {{
+                background-color: {colr_accent};
+                color: #FFFFFF;
+            }}
+
+            QMenuBar::item:hover {{
+                background-color: {colr_accent};
+            }}
+
+            QMenu {{
+                background-color: {colr_bg};
+            }}
+
+            QMenu::item {{
+                background-color: {colr_bg};
+                color: {colr_txtDim};
+            }}
+
+            QMenu::item:selected {{
+                background-color: {colr_accent};
+                color: #FFFFFF;
+            }}
+
+            QMenu::item:pressed {{
+                background-color: {colr_accent};
+                color: #FFFFFF;
+            }}
+
+            QMenu::item:hover {{
+                background-color: {colr_accent};
+            }}
+
+
+            ''')

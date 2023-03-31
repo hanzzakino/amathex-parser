@@ -27,7 +27,7 @@ import re
 import math
 
 
-class MathParser():
+class AmthexParser():
 
     # This will solved the arr_expression error where 5*-6 will be ['5','*','-','6']
     # The item '*','-' will produce an error thus it needs to be converted from  ['5','*','-','6'] to ['5','*','-6']
