@@ -16,18 +16,17 @@ from ui.main import MainUI
 import sys
 import os
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app = QApplication(sys.argv)
 
-    scriptDir = os.path.dirname(os.path.realpath(__file__))
-
+    # create main window object
     window = QMainWindow()
     window.setWindowIcon(
-        QIcon(scriptDir + os.path.sep + 'resources/favicon.ico'))
-    window.setWindowTitle("MathEx")
+        QIcon(os.path.dirname(os.path.realpath(__file__)) + os.path.sep + 'resources\\favicon.ico'))
 
-    ui = MainUI()
-    ui.setupUi(window)
+    # create main ui object
+    ui = MainUI(window)
 
     window.show()
+
     sys.exit(app.exec())

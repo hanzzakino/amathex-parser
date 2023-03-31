@@ -3,142 +3,153 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from lib.mathex import MathParser
 from ui.dialog.about import AboutDialog
-
-
-colr_bg = "#212121"
-colr_bg2 = "#303030"
-colr_txtDim = "rgb(160,160,160)"
-colr_accent = "#77bdfb"
-colr_txtfield = "rgb(230,230,230)"
+from ui.styles.style import Style
 
 
 class MainUI(object):
-    def setupUi(self, Mathex):
-        if not Mathex.objectName():
-            Mathex.setObjectName(u"Mathex")
+    def __init__(self, parentWindow):
 
-        Mathex.resize(640, 340)
-        Mathex.setFixedSize(640, 340)
-        sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(Mathex.sizePolicy().hasHeightForWidth())
-        Mathex.setSizePolicy(sizePolicy)
-        Mathex.setStyleSheet(f"QWindow#Mathex {{  }}")
+        if not parentWindow.objectName():
+            parentWindow.setObjectName(u'parentWindow')
 
-        fnt_roboto_12 = QFont()
-        fnt_roboto_12.setFamily(u"Roboto")
-        fnt_roboto_12.setPointSize(12)
+        # UI Setup
+        parentWindow.resize(640, 340)
+        parentWindow.setFixedSize(640, 340)
+        self.sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        self.sizePolicy.setHorizontalStretch(0)
+        self.sizePolicy.setVerticalStretch(0)
+        self.sizePolicy.setHeightForWidth(
+            parentWindow.sizePolicy().hasHeightForWidth())
+        parentWindow.setSizePolicy(self.sizePolicy)
 
-        fnt_roboto_10 = QFont()
-        fnt_roboto_10.setFamily(u"Roboto")
-        fnt_roboto_10.setPointSize(10)
+        self.global_style = Style('light')
+        parentWindow.setStyleSheet(self.global_style.current_theme())
 
-        fnt_robotobold = QFont()
-        fnt_robotobold.setFamily(u"Roboto")
-        fnt_robotobold.setPointSize(28)
-        fnt_robotobold.setBold(True)
-        fnt_robotobold.setWeight(75)
+        self.par = MathParser()
 
-        self.widget_main = QWidget(Mathex)
-        self.widget_main.setObjectName(u"widget_main")
-        self.widget_main.setStyleSheet(
-            f"QWidget#widget_main {{ background-color: {colr_bg}; }}")
+        # UI Elements
+        self.widget_main = QWidget(parentWindow)
+        self.widget_main.setObjectName(u'widget_main')
 
         self.txt_input = QLineEdit(self.widget_main)
-        self.txt_input.setObjectName(u"txt_input")
-        self.txt_input.setPlaceholderText("Math Expression")
+        self.txt_input.setObjectName(u'txt_input')
         self.txt_input.setGeometry(QRect(20, 120, 600, 40))
-        self.txt_input.setFont(fnt_roboto_12)
-        self.txt_input.setStyleSheet(
-            f"QLineEdit#txt_input {{ border-style: none; padding: 0px 10px 0px 10px; background-color: {colr_txtfield}; }}")
-
-        self.lbl_input = QLabel(self.widget_main)
-        self.lbl_input.setObjectName(u"lbl_input")
-        self.lbl_input.setStyleSheet(
-            f"QLabel#lbl_input {{ color: {colr_txtDim}; }}")
-        self.lbl_input.setGeometry(QRect(20, 100, 47, 13))
-        self.lbl_input.setFont(fnt_roboto_12)
-
-        self.txt_output = QLineEdit(self.widget_main)
-        self.txt_output.setObjectName(u"txt_output")
-        self.txt_output.setPlaceholderText("Answer")
-        self.txt_output.setGeometry(QRect(20, 230, 600, 40))
-        self.txt_output.setReadOnly(True)
-        self.txt_output.setFont(fnt_roboto_12)
-        self.txt_output.setStyleSheet(
-            f"QLineEdit#txt_output {{ border-style: none; padding: 0px 10px 0px 10px; background-color: {colr_txtfield}; }}")
-
-        self.lbl_output = QLabel(self.widget_main)
-        self.lbl_output.setObjectName(u"lbl_output")
-        self.lbl_output.setStyleSheet(
-            f"QLabel#lbl_output {{ color: {colr_txtDim}; }}")
-        self.lbl_output.setGeometry(QRect(20, 210, 47, 13))
-        self.lbl_output.setFont(fnt_roboto_12)
-
-        par = MathParser()
+        self.txt_input.setFont(self.global_style.fnt_roboto(12))
 
         def parseMath():
-            try:
-                # ((5-(-3*4*5))/(67-9))^3 - 1.407524908770347 = 0
-                inputText = self.txt_input.text()
-                if inputText == "":
-                    self.txt_output.setText("")
-                else:
-                    self.txt_output.setText(
-                        str(par.solveExpression(inputText)))
-            except Exception as e:
-                self.txt_output.setText("Error")
-
+            # ((5-(-3*4*5))/(67-9))^3 - 1.407524908770347 = 0
+            inputText = self.txt_input.text()
+            if inputText == '':
+                self.txt_output.setText('')
+            else:
+                self.txt_output.setText(
+                    str(self.par.solveExpression(inputText)))
         self.txt_input.textChanged.connect(parseMath)
 
-        self.lbl_maintitle = QLabel(self.widget_main)
-        self.lbl_maintitle.setObjectName(u"lbl_maintitle")
-        self.lbl_maintitle.setStyleSheet(
-            f"QLabel#lbl_maintitle {{ color: {colr_accent}; }}")
-        self.lbl_maintitle.setGeometry(QRect(20, 20, 191, 51))
-        self.lbl_maintitle.setFont(fnt_robotobold)
+        self.lbl_input = QLabel(self.widget_main)
+        self.lbl_input.setObjectName(u'lbl_input')
+        self.lbl_input.setGeometry(QRect(20, 100, 60, 16))
+        self.lbl_input.setFont(self.global_style.fnt_roboto(12))
 
-        self.menuBar = QMenuBar(Mathex)
-        self.menuBar.setObjectName(u"menuBar")
+        self.txt_output = QLineEdit(self.widget_main)
+        self.txt_output.setObjectName(u'txt_output')
+
+        self.txt_output.setGeometry(QRect(20, 230, 600, 40))
+        self.txt_output.setReadOnly(True)
+        self.txt_output.setFont(self.global_style.fnt_roboto(12))
+
+        self.lbl_output = QLabel(self.widget_main)
+        self.lbl_output.setObjectName(u'lbl_output')
+        self.lbl_output.setGeometry(QRect(20, 210, 60, 16))
+        self.lbl_output.setFont(self.global_style.fnt_roboto(12))
+
+        self.lbl_maintitle = QLabel(self.widget_main)
+        self.lbl_maintitle.setObjectName(u'lbl_maintitle')
+        self.lbl_maintitle.setGeometry(QRect(20, 20, 191, 51))
+        self.lbl_maintitle.setFont(self.global_style.fnt_roboto_bold(28))
+
+        self.menuBar = QMenuBar(parentWindow)
+        self.menuBar.setObjectName(u'menuBar')
         self.menuBar.setGeometry(QRect(0, 0, 640, 20))
-        self.menuBar.setStyleSheet(
-            f"QMenuBar#menuBar {{ color: {colr_txtDim}; background-color: {colr_bg2}; }}")
 
         self.menu_help = QMenu(self.menuBar)
-        self.menu_help.setObjectName(u"menu_help")
-        self.menu_help.setStyleSheet(
-            f"QMenu#menu_help {{ color: {colr_txtDim}; background-color: {colr_bg2}; }}")
+        self.menu_help.setObjectName(u'menu_help')
         self.menuBar.addAction(self.menu_help.menuAction())
 
-        self.atn_about = QAction(Mathex)
-        self.atn_about.setObjectName(u"atn_about")
-        self.menu_help.addAction(self.atn_about)
+        self.atn_about = QAction(parentWindow)
+        self.atn_about.setObjectName(u'atn_about')
 
         def launchAboutDialog():
-            about_dialog = AboutDialog()
-            dlg = QDialog(Mathex)
-            about_dialog.setupUi(dlg)
-            dlg.exec()
+            about_dialog = AboutDialog(self.global_style)
+            child_dialog = QDialog(parentWindow)
+            about_dialog.setupUi(child_dialog)
+            child_dialog.exec()
         self.atn_about.triggered.connect(launchAboutDialog)
+        self.menu_help.addAction(self.atn_about)
 
-        Mathex.setMenuBar(self.menuBar)
-        Mathex.setCentralWidget(self.widget_main)
+        self.menu_view = QMenu(self.menuBar)
+        self.menu_view.setObjectName(u'menu_view')
+        self.menuBar.addAction(self.menu_view.menuAction())
+
+        self.submenu_theme = QMenu(parentWindow)
+        self.submenu_theme.setObjectName(u'submenu_theme')
+        self.menu_view.addMenu(self.submenu_theme)
+
+        self.atn_theme_dark = QAction(parentWindow)
+        self.atn_theme_dark.setObjectName(u'atn_theme_dark')
+
+        def changeThemeToDark():
+            self.global_style.theme = 'dark'
+            parentWindow.setStyleSheet(self.global_style.current_theme())
+            self.atn_theme_light.setChecked(False)
+            self.atn_theme_dark.setChecked(True)
+        self.atn_theme_dark.triggered.connect(changeThemeToDark)
+        self.atn_theme_dark.setCheckable(True)
+        self.submenu_theme.addAction(self.atn_theme_dark)
+
+        self.atn_theme_light = QAction(parentWindow)
+        self.atn_theme_light.setObjectName(u'atn_theme_light')
+
+        def changeThemeToLight():
+            self.global_style.theme = 'light'
+            parentWindow.setStyleSheet(self.global_style.current_theme())
+            self.atn_theme_light.setChecked(True)
+            self.atn_theme_dark.setChecked(False)
+        self.atn_theme_light.triggered.connect(changeThemeToLight)
+        self.atn_theme_light.setCheckable(True)
+        self.atn_theme_light.setChecked(True)
+        self.submenu_theme.addAction(self.atn_theme_light)
+
+        parentWindow.setMenuBar(self.menuBar)
+        parentWindow.setCentralWidget(self.widget_main)
 
         QWidget.setTabOrder(self.txt_input, self.txt_output)
-        self.retranslateUi(Mathex)
-        QMetaObject.connectSlotsByName(Mathex)
+        self.retranslateUi(parentWindow)
+        QMetaObject.connectSlotsByName(parentWindow)
 
-    def retranslateUi(self, Mathex):
-        # Mathex.setWindowTitle(
-        #     QCoreApplication.translate("Mathex", u"Mathex", None))
+    # Set text values here
+    def retranslateUi(self, parentWindow):
+        parentWindow.setWindowTitle(
+            QCoreApplication.translate('parentWindow', u'Mathex v1.0', None))
         self.lbl_input.setText(
-            QCoreApplication.translate("Mathex", u"Input:", None))
+            QCoreApplication.translate('parentWindow', u'Input:', None))
+        self.txt_output.setPlaceholderText(
+            QCoreApplication.translate('parentWindow', u'Answer', None))
+        self.txt_input.setPlaceholderText(
+            QCoreApplication.translate('parentWindow', u'Math Expression', None))
         self.lbl_output.setText(
-            QCoreApplication.translate("Mathex", u"Output:", None))
+            QCoreApplication.translate('parentWindow', u'Output:', None))
         self.menu_help.setTitle(
-            QCoreApplication.translate("Mathex", u"Help", None))
+            QCoreApplication.translate('parentWindow', u'Help', None))
+        self.menu_view.setTitle(
+            QCoreApplication.translate('parentWindow', u'View', None))
         self.atn_about.setText(
-            QCoreApplication.translate("Mathex", u"About", None))
+            QCoreApplication.translate('parentWindow', u'About', None))
+        self.submenu_theme.setTitle(
+            QCoreApplication.translate('parentWindow', u'Theme', None))
+        self.atn_theme_dark.setText(
+            QCoreApplication.translate('parentWindow', u'Dark', None))
+        self.atn_theme_light.setText(
+            QCoreApplication.translate('parentWindow', u'Light', None))
         self.lbl_maintitle.setText(
-            QCoreApplication.translate("Mathex", u"MathEx", None))
+            QCoreApplication.translate('parentWindow', u'MathEx', None))
