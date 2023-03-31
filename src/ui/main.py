@@ -31,6 +31,18 @@ class MainUI(object):
         self.widget_main = QWidget(parentWindow)
         self.widget_main.setObjectName(u'widget_main')
 
+        # Title
+        self.lbl_maintitle = QLabel(self.widget_main)
+        self.lbl_maintitle.setObjectName(u'lbl_maintitle')
+        self.lbl_maintitle.setGeometry(QRect(20, 20, 191, 51))
+        self.lbl_maintitle.setFont(self.global_style.fnt_roboto_bold(28))
+
+        # Input Field
+        self.lbl_input = QLabel(self.widget_main)
+        self.lbl_input.setObjectName(u'lbl_input')
+        self.lbl_input.setGeometry(QRect(20, 100, 60, 16))
+        self.lbl_input.setFont(self.global_style.fnt_roboto(12))
+
         self.txt_input = QLineEdit(self.widget_main)
         self.txt_input.setObjectName(u'txt_input')
         self.txt_input.setGeometry(QRect(20, 120, 600, 40))
@@ -46,14 +58,9 @@ class MainUI(object):
                     str(self.par.solveExpression(inputText)))
         self.txt_input.textChanged.connect(parseMath)
 
-        self.lbl_input = QLabel(self.widget_main)
-        self.lbl_input.setObjectName(u'lbl_input')
-        self.lbl_input.setGeometry(QRect(20, 100, 60, 16))
-        self.lbl_input.setFont(self.global_style.fnt_roboto(12))
-
+        # Output Field
         self.txt_output = QLineEdit(self.widget_main)
         self.txt_output.setObjectName(u'txt_output')
-
         self.txt_output.setGeometry(QRect(20, 230, 600, 40))
         self.txt_output.setReadOnly(True)
         self.txt_output.setFont(self.global_style.fnt_roboto(12))
@@ -63,18 +70,15 @@ class MainUI(object):
         self.lbl_output.setGeometry(QRect(20, 210, 60, 16))
         self.lbl_output.setFont(self.global_style.fnt_roboto(12))
 
-        self.lbl_maintitle = QLabel(self.widget_main)
-        self.lbl_maintitle.setObjectName(u'lbl_maintitle')
-        self.lbl_maintitle.setGeometry(QRect(20, 20, 191, 51))
-        self.lbl_maintitle.setFont(self.global_style.fnt_roboto_bold(28))
+        # Menu Bar
+        self.menu_bar = QMenuBar(parentWindow)
+        self.menu_bar.setObjectName(u'menu_bar')
+        self.menu_bar.setGeometry(QRect(0, 0, 640, 20))
 
-        self.menuBar = QMenuBar(parentWindow)
-        self.menuBar.setObjectName(u'menuBar')
-        self.menuBar.setGeometry(QRect(0, 0, 640, 20))
-
-        self.menu_help = QMenu(self.menuBar)
+        # Help menu
+        self.menu_help = QMenu(self.menu_bar)
         self.menu_help.setObjectName(u'menu_help')
-        self.menuBar.addAction(self.menu_help.menuAction())
+        self.menu_bar.addAction(self.menu_help.menuAction())
 
         self.atn_about = QAction(parentWindow)
         self.atn_about.setObjectName(u'atn_about')
@@ -87,9 +91,10 @@ class MainUI(object):
         self.atn_about.triggered.connect(launchAboutDialog)
         self.menu_help.addAction(self.atn_about)
 
-        self.menu_view = QMenu(self.menuBar)
+        # View menu
+        self.menu_view = QMenu(self.menu_bar)
         self.menu_view.setObjectName(u'menu_view')
-        self.menuBar.addAction(self.menu_view.menuAction())
+        self.menu_bar.addAction(self.menu_view.menuAction())
 
         self.submenu_theme = QMenu(parentWindow)
         self.submenu_theme.setObjectName(u'submenu_theme')
@@ -120,12 +125,16 @@ class MainUI(object):
         self.atn_theme_light.setChecked(True)
         self.submenu_theme.addAction(self.atn_theme_light)
 
-        parentWindow.setMenuBar(self.menuBar)
+        # Set Layout
+        parentWindow.setMenuBar(self.menu_bar)
         parentWindow.setCentralWidget(self.widget_main)
 
+        # Additional Options
         QWidget.setTabOrder(self.txt_input, self.txt_output)
-        self.retranslateUi(parentWindow)
         QMetaObject.connectSlotsByName(parentWindow)
+
+        # Set UI texts
+        self.retranslateUi(parentWindow)
 
     # Set text values here
     def retranslateUi(self, parentWindow):

@@ -1,10 +1,8 @@
 '''
 @author: Hanz Aquino
-
-
 A UI for my Math expression solver algorithm called MathExParser
-
 '''
+
 __author__ = 'Hanz Aquino'
 __version__ = '$Revision: 1.0 $'
 __datecreated__ = '$Date: 2022-02-17 $'
