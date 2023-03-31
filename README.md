@@ -2,4 +2,4 @@
 
 An algorithm for parsing text to python arithmetic operation
 
-![Screenshot 2022-12-24 173452](https://user-images.githubusercontent.com/80265393/209430090-35bff0f8-7d00-4935-9632-3b902956a3d0.png)
+![Screenshot 2023-04-01 014757](https://user-images.githubusercontent.com/80265393/229193103-873d7af7-ae7e-4c7a-86c3-837b6a2daf5d.png)
