@@ -15,6 +15,7 @@ class AboutDialog(object):
         self.btn_aboutOK = QPushButton(dialog)
         self.btn_aboutOK.setFont(self.style.fnt_roboto_bold(10))
         self.btn_aboutOK.setGeometry(QRect(110, 90, 75, 31))
+        self.btn_aboutOK.setCursor(Qt.CursorShape.PointingHandCursor)
         self.label = QLabel(dialog)
         self.label.setObjectName(u'label')
         self.label.setGeometry(QRect(10, 10, 260, 81))
