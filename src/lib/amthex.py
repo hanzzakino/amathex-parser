@@ -135,7 +135,8 @@ class AmthexParser():
         # Convert the string expression to list
         arr_expression = list(str_expression)
         # List all the functions
-        math_func_keys = ['asin', 'acos', 'atan', 'sin', 'cos', 'tan', 'log']
+        math_func_keys = ['asin', 'acos', 'atan',
+                          'sin', 'cos', 'tan', 'log', 'ln', 'cil', 'floor']
         # Dictionary of Functions with function operartor as key and function method as value
         math_functions = {
             'sin': lambda x:  math.sin(x),
@@ -145,6 +146,9 @@ class AmthexParser():
             'acos': lambda x:  math.acos(x),
             'atan': lambda x:  math.atan(x),
             'log': lambda x:  math.log(x),
+            'ln': lambda x:  math.log(x),
+            'cil': lambda x: math.ceil(x),
+            'floor': lambda x: math.floor(x),
         }
         # Check if brackets are matched in count
         if not arr_expression.count('(') == arr_expression.count(')'):

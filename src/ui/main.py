@@ -33,7 +33,7 @@ class MainUI(object):
         # Title
         self.lbl_maintitle = QLabel(self.widget_main)
         self.lbl_maintitle.setObjectName(u'lbl_maintitle')
-        self.lbl_maintitle.setGeometry(QRect(20, 14, 191, 51))
+        self.lbl_maintitle.setGeometry(QRect(20, 14, 600, 51))
         self.lbl_maintitle.setFont(self.global_style.fnt_roboto_bold(28))
 
         # Input Field
@@ -69,20 +69,6 @@ class MainUI(object):
         self.menu_bar = QMenuBar(parentWindow)
         self.menu_bar.setGeometry(QRect(0, 0, 640, 20))
 
-        # Help menu
-        self.menu_help = QMenu(self.menu_bar)
-        self.menu_bar.addAction(self.menu_help.menuAction())
-
-        self.atn_about = QAction(parentWindow)
-
-        def launchAboutDialog():
-            about_dialog = AboutDialog(self.global_style)
-            child_dialog = QDialog(parentWindow)
-            about_dialog.setupUi(child_dialog)
-            child_dialog.exec()
-        self.atn_about.triggered.connect(launchAboutDialog)
-        self.menu_help.addAction(self.atn_about)
-
         # View menu
         self.menu_view = QMenu(self.menu_bar)
         self.menu_bar.addAction(self.menu_view.menuAction())
@@ -113,6 +99,20 @@ class MainUI(object):
         self.atn_theme_light.setChecked(True)
         self.submenu_theme.addAction(self.atn_theme_light)
 
+        # Help menu
+        self.menu_help = QMenu(self.menu_bar)
+        self.menu_bar.addAction(self.menu_help.menuAction())
+
+        self.atn_about = QAction(parentWindow)
+
+        def launchAboutDialog():
+            about_dialog = AboutDialog(self.global_style)
+            child_dialog = QDialog(parentWindow)
+            about_dialog.setupUi(child_dialog)
+            child_dialog.exec()
+        self.atn_about.triggered.connect(launchAboutDialog)
+        self.menu_help.addAction(self.atn_about)
+
         # Set Layout
         parentWindow.setMenuBar(self.menu_bar)
         parentWindow.setCentralWidget(self.widget_main)
@@ -127,7 +127,7 @@ class MainUI(object):
     # Set text values here
     def retranslateUi(self, parentWindow):
         parentWindow.setWindowTitle(
-            QCoreApplication.translate('parentWindow', u'AmthEx v1.0', None))
+            QCoreApplication.translate('parentWindow', u'AmthEx v1.1', None))
         self.lbl_input.setText(
             QCoreApplication.translate('parentWindow', u'Input:', None))
         self.txt_output.setPlaceholderText(
